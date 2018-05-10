@@ -1,0 +1,48 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<title>注册系统</title> 
+<style type="text/css"> 
+form { 
+  text-align: center; 
+} 
+</style> 
+</head> 
+<body> 
+  
+  <form action="register.php" method="post" name="form_register"
+    onsubmit="return check()"> 
+        邮箱<input type="text" name="email" id="email"><br> 
+        用户名<input type="text" name="username" id="username"><br> 
+    密码<input type="password" name="password" id="password"><br> 
+    确认密码<input type="password" name="assertpassword" id="assertpassword"><br> 
+    
+    <input type="submit" value="注册"> 
+  
+  </form> 
+  
+  <script type="text/javascript"> 
+    function check() { 
+    	var email=document.getElementById("email").value; 
+      var username=document.getElementById("username").value; 
+      var password=document.getElementById("password").value; 
+      var assertpassword=document.getElementById("assertpassword").value; 
+      var regex=/^[/s]+$/; 
+        
+      if(regex.test(username)||username.length==0){ 
+        alert("用户名格式不对"); 
+        return false; 
+      } 
+      if(regex.test(password)||password.length==0){ 
+        alert("密码格式不对"); 
+        return false;     
+      } 
+      if(password!=assertpassword){ 
+        alert("两次密码不一致"); 
+        return false; 
+      } 
+    } 
+  </script> 
+</body> 
+</html> 
