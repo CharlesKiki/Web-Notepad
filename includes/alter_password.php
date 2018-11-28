@@ -6,11 +6,18 @@
 </head> 
 <body> 
   <?php
-  session_start (); 
+  session_start ();
+	//Session是保存到服务器的一种会话保存方式。
+		//尝试增加Cookie验证方式
+		//Session验证方式
+		//数据库验证方式
   $username = $_REQUEST ["username"]; 
   $oldpassword = $_REQUEST ["oldpassword"]; 
   $newpassword = $_REQUEST ["newpassword"]; 
     
+	//连接数据库
+	//此处连接数据库应该是一种浪费的行为
+	//连接可以持续多久？
   $con = mysqli_connect ( "localhost", "root", "test" ); 
   if (! $con) { 
     die ( '数据库连接失败' . $mysqli_error () ); 
@@ -36,7 +43,13 @@
   <?php
   } 
   if ($oldpassword != $dbpassword) { 
+  //尚不清楚PHP和JS的交互方式，传值方式。
+  //服务器处理的信息应该通缩JS的AJAX进行通信而不是
+  //全部的交互在远程进行。这里的错误就是渲染和业务逻辑全部耦合
+  //采用PHP框架可以解决这个问题。
+  //get post
     ?> 
+	
   <script type="text/javascript"> 
     alert("密码错误"); 
     window.location.href="alter_password.html"; 
