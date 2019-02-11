@@ -7,9 +7,9 @@
 <body> 
   <?php 
     session_start(); 
-    $username=$_REQUEST["username"]; 
-    $password=$_REQUEST["password"]; 
-  	$email=$_REQUEST["email"]; 
+    $username = $_REQUEST["username"]; 
+    $password = $_REQUEST["password"]; 
+  	$email    = $_REQUEST["email"]; 
 
     $con=mysqli_connect("localhost","root","test"); 
     //注意这里的参数需要根据需要变化
@@ -51,10 +51,6 @@
     alert("注册成功"); 
     window.location.href="index.html"; 
   </script> 
-    
-    
-        
-      
-      
+  
 </body> 
 </html> 
