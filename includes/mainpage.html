@@ -1,0 +1,125 @@
+<!doctype html> 
+<html> 
+<head>  
+	<meta charset="UTF-8">
+	<link href="css\style.css" rel="stylesheet" type="text/css"/>
+	<title>MyBook</title>
+</head> 
+<style> 
+	/* Book栏特效 */
+	.div-noteglass{ background:#FFFFFF;
+	width:98%;
+	height:12%;
+	padding:2px;
+	color:#080000; 
+	font-size:20px;
+	filter:alpha(Opacity=70);
+	-moz-opacity:0.7;opacity: 0.7;
+	border-radius:5px 5px 5px 5px;
+	border:2px solid #4169E1;
+	} 
+	.div-noteglass:hover{
+		background-color:#4682B4;
+	}
+	/* Note栏特效 */
+	.div-bookglass{ 
+		background:#FFFFFF;
+		width:95%;
+		height:5%;
+		padding:2px;
+		color:#080000; 
+		font-size:20px;
+		filter:alpha(Opacity=70);
+		-moz-opacity:0.7;
+		opacity: 0.7;
+		border-radius:5px 5px 5px 5px;
+		border:2px solid #4169E1;} 
+	.div-bookglass:hover{
+		background-color:#4682B4;
+	}
+</style> 
+<body> 
+
+<script type="text/javascript"> 
+  alert("退出登录"); 
+  window.location.href="exit.php"; 
+</script> 
+
+	<!-- 网页开始 -->
+	<div data-options="region:'north',border:false" style="height:30px;background-color:#F0F8FF;">
+	<!-- north region -->
+		<a style="font-size:23px;" style="float:right">Hi,欢迎
+     <!-- 这里显示的内容应该由JS来操作 -->
+		</a>
+		<i class="fa fa-key fa-2x" aria-hidden="true" onclick="ChangePW()" style="float:right">修改密码</i>
+		<i class="fa fa-cog fa-2x" aria-hidden="true" onclick="ChangeSetting()" style="float:right">设置</i>
+		<i class="fa fa-power-off fa-2x" aria-hidden="true" onclick="ToExit()" style="float:right">退出</i>
+		<a id = "sy_time"> </a>
+	</div>
+	<div data-options="region:'east',title:'编辑笔记',split:true" style="width:900px;background-color:#F0F8FF;">
+			<iframe id="temp" src="StaticNoteZone.html"   style="width:100%;height:100%;"></iframe>
+	</div><!--这是编辑区-->
+
+	</div>
+    <div data-options="region:'west',title:'我的笔记本',split:true" style="width:200px;background-color:#F0F8FF;">
+		<div style="margin-bottom:20px">
+			<form action="lefttreeadd.php"  method="POST">
+			<input type="submit" value="Add" name="submit" style="float:right;height:32px"></input>
+			<input class="easyui-textbox" name="newfolder" data-options="prompt:'新建笔记本...'" style="width:78%;height:32px;float:left" >	
+			</form>
+		</div>
+		<div class="div-bookglass">
+		<a>Trash</a>
+		<!--ID指向ifream-->
+		</div>
+		<!-- 动态笔记本 -->
+	</div>
+	<!-- 笔记List区域 -->
+	<div data-options="region:'center',title:'我的笔记'" style="padding:5px;border:1px solid #ccc;background-color:#F0F8FF;">
+		<!--动态笔记-->
+		<div>
+			<form action="search.php"  method="POST">
+				<input type="submit" value="Search" name="submit" style="float:right;height:32px"></input>
+				<input class="easyui-textbox" name="searchnote" data-options="prompt:'搜索笔记...'  " style="width:75%;height:32px;float:left" >	
+			</form>
+			<iframe src="search.php" style="width:100%;height:100%;">
+			</iframe> 
+		</div>
+	</div>
+	<script>
+		/* 图标设置 */
+		 function ToExit(){
+				 window.location.href="exit.php"; 
+				 }
+			 function ChangePW(){
+				 window.location.href="alter_password.html"; 
+				 }
+			 function ChangeSetting(){
+				 window.location.href="setting.php"; 
+			 }
+			 function temp(id) {  
+				 document.getElementById("temp").src = id;  
+			 } 
+	 </script>
+	<!-- JS时间显示 -->
+	<script language="JavaScript">
+		function getTime(){ 
+		   str = "当前时间："
+		   var p = document.getElementById("sy_time"); 
+		   time = new Date(); 
+		   year = time.getFullYear(); 
+		   month = time.getMonth() + 1; 
+		   day = time.getDate(); 
+		   hour = time.getHours(); 
+		   minutes = time.getMinutes(); 
+		   seconds = time.getSeconds(); 
+		   str = str + year +"-"+ month +"-"+ day + " " +hour+":"+minutes+":"+seconds; 
+		   p.innerText = str; 
+		   setTimeout(getTime,1000); 
+		 } 
+		 window.onload = function(){ 
+		   getTime(); 
+		 }
+	</script>
+</body> 
+</html> 
