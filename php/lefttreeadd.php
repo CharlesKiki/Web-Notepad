@@ -1,16 +1,9 @@
 <?php
 /* 注意，一个PHP就是直接返回了一个功能 */
-session_start();//登录系统开启一个session内容 
+session_start();								//登录系统开启一个session内容 
 $foldername=$_POST["newfolder"];
 /* 首先用PHP接住来自客户端的参数 */
-$con = mysqli_connect("localhost","root","test");
-if (!$con)
- {
- die('Could not connect: ' . mysqli_error($con));
- }
-/* 登陆数据库 */
-mysqli_select_db($con,"db_notepad");
-/* 选定数据库 */
+
 $result=mysqli_query($con,"select * from notebook where bookName ='{$foldername}';"); 
 //这里需要针对数据库内部的row进行查询
 if (!$result) {

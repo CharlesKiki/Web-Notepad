@@ -10,10 +10,7 @@
     $username=$_REQUEST["username"];//获取html中的用户名（通过post请求） 
     $password=$_REQUEST["password"];//获取html中的密码（通过post请求） 
   
-    $con=mysqli_connect("localhost","root","test");//连接mysql 数据库，账户名root ，密码root 
-    if (!$con) { 
-      die('数据库连接失败'.$mysqli_error()); 
-    } 
+
     mysqli_select_db($con,"db_notepad");//db_notepad数据库； 
     $dbusername=null; 
     $dbpassword=null; 

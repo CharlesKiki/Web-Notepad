@@ -15,14 +15,7 @@
   $oldpassword = $_REQUEST ["oldpassword"]; 
   $newpassword = $_REQUEST ["newpassword"]; 
     
-	//连接数据库
-	//此处连接数据库应该是一种浪费的行为
-	//连接可以持续多久？
-  $con = mysqli_connect ( "localhost", "root", "test" ); 
-  if (! $con) { 
-    die ( '数据库连接失败' . $mysqli_error () ); 
-  } 
-  mysqli_select_db ($con,"db_notepad"); 
+	
   $dbusername = null; 
   $dbpassword = null; 
   $result = mysqli_query ($con,"select * from user where username ='{$username}';" ); 

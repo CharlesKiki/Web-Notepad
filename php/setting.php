@@ -96,8 +96,7 @@ display:block; color:#FFFFFF; background:#87CEFA;
 		<div style="width:600px;margin-left:auto;margin-right:auto;">
 		<h1>账号信息</h1>
 	<?php
-		$con = mysqli_connect("localhost","root","test");
-		mysqli_select_db($con,"db_notepad");
+		
 		$userresult=mysqli_query($con,"select username from user ;"); 
 		$username=mysqli_fetch_array($userresult);
 		$createTimeresult=mysqli_query($con,"select createTime from user ;"); 

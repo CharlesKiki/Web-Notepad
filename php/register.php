@@ -11,14 +11,7 @@
     $password = $_REQUEST["password"]; 
   	$email    = $_REQUEST["email"]; 
 
-    $con=mysqli_connect("localhost","root","test"); 
-    //注意这里的参数需要根据需要变化
-    if (!$con) { 
-      die('数据库连接失败'.$mysqli_error()); 
-    } 
-    //检测是否连接成功数据库
-    mysqli_select_db($con,"db_notepad"); 
-    //选定特殊的数据库进行操作
+
     $dbusername=null; 
     $dbpassword=null;
     //这里是对登陆数据库的密码设置

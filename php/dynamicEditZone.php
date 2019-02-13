@@ -32,8 +32,7 @@
 session_start();
 $show=$_POST['Cdata'];
 echo $show;
-$con=mysqli_connect("localhost","root","test");
-mysqli_select_db($con,"db_notepad");  
+
 $nameresult=mysqli_query($con,"select notename from note where id='$show';") or die("存入数据库失败".mysqli_error($con)) ;
 $name=mysqli_fetch_array($nameresult);	
 $contentresult=mysqli_query($con,"select content from note where id='$show';") or die("存入数据库失败".mysqli_error($con)) ;

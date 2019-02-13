@@ -17,8 +17,7 @@
         <?php
 	error_reporting( E_ALL&~E_NOTICE );
 	/* 消除PHP警告 */
-		$con = mysqli_connect("localhost","root","test");
-		mysqli_select_db($con,"db_notepad");
+
 		$noteidresult=mysqli_query($con,"select id from note ;"); 
 		$noteid=mysqli_fetch_array($noteidresult);
 		/* print_r($noteidresult); */
