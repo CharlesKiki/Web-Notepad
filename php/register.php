@@ -1,11 +1,4 @@
-<!doctype html> 
-<html> 
-<head> 
-<meta charset="UTF-8"> 
-  <title>注册用户</title> 
-</head> 
-<body> 
-  <?php 
+<?php 
     session_start(); 
     $username = $_REQUEST["username"]; 
     $password = $_REQUEST["password"]; 
@@ -27,23 +20,11 @@
     } 
     if(!is_null($dbusername))
     { 
-	?> 
-		  <script type="text/javascript"> 
-		    alert("用户已存在"); 
-		    window.location.href="register.html"; 
-		  </script>  
-		  <?php 
+
     } 
     //检查用户名重复功能结束
     $id=mysqli_insert_id($con);
     mysqli_query($con,"insert into user (id,username,password,email) values('$id','$username','$password','$email')") or die("存入数据库失败".mysqli_error($con)) ; 
     mysqli_close($con); 
     //关闭SQL连接
-  		?> 
-  <script type="text/javascript"> 
-    alert("注册成功"); 
-    window.location.href="index.html"; 
-  </script> 
-  
-</body> 
-</html> 
+?> 

@@ -19,12 +19,6 @@ if (!$result) {
     } 
     if(!is_null($foldername))
     { 
-	?> 
-		  <script type="text/javascript"> 
-		    alert("笔记本已存在"); 
-			window.location.href="welcome.php";
-		  </script>  
-		  <?php 
 		  
     } 
 	$ID=$_SESSION["userid"];
@@ -32,7 +26,3 @@ if (!$result) {
     mysqli_close($con); 
     //关闭SQL连接
 		?> 
-  <script type="text/javascript"> 
-    alert("添加成功"); 
-	window.location.href="welcome.php";
-  </script> 

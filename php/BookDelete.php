@@ -1,11 +1,4 @@
-<!doctype html> 
-<html> 
-<head> 
-<meta charset="UTF-8"> 
- <title>Delete</title> 
-</head> 
-<body> 
-  <?php 
+<?php 
     session_start(); 
 	$BookID=$_POST["data"];
 
@@ -14,10 +7,6 @@
     mysqli_close($con); 
     //关闭SQL连接
   		?> 
-  <script type="text/javascript"> 
-    alert("删除成功"); 
-    window.location.href="welcome.php"; 
-  </script> 
-    
-</body> 
-</html> 
+
+    //删除成功
+

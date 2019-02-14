@@ -27,19 +27,11 @@ while ($row=mysqli_fetch_array($result)) {
   $$notename=$row["notename"]; 
 } 
   if(!is_null($notename)){ 
-	?> 
-		  <script type="text/javascript"> 
-		    alert("笔记已存在"); 
-			/* window.location.href="welcome.php"; */
-		  </script>  
-		  <?php 
+		  //笔记已存在
     } 
 	$ID=$_SESSION["userid"];
     mysqli_query($con,"insert into note(userid,notename,content) values('$ID','$notename','$notecontent');") or die("存入数据库失败".mysqli_error($con)); 
     mysqli_close($con); 
     //关闭SQL连接
 		?> 
-  <script type="text/javascript"> 
-    alert("添加成功"); 
-	window.location.href="dynamicEditZone.php";
-  </script> 
+    //添加成功
