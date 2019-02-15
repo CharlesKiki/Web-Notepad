@@ -18,7 +18,13 @@
 这里提出了对这个应用的一些要求，可能是功能上的，也可能是在开发的标准上的。这有益于更加清晰的认识软件的边界和维护并阅读代码。
 
 ### 源码文件介绍
-
-php/
-
-    - connect_sql.php 登陆指定的SQL数据库
+    index.html         登录页
+    php/
+     - connect_sql.php 登陆指定的SQL数据库
+    
+    includes/
+     - mainpage.html   主界面
+     
+    js/               
+     - form_check.js   表单检查
+    css/

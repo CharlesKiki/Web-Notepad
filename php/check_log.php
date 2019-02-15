@@ -1,82 +1,51 @@
-	<!-- 登陆的验证 -->
-	<?php
-	session_start (); 
-	if (isset ( $_SESSION ["code"] )) {//判断code存不存在，如果不存在，说明异常登录 
-	echo "${_SESSION["username"]}";//显示登录用户名
-	}
-	else {//code不存在，调用exit.php 退出登录 
-    ?> 
-    <?php 
-    } 
-    ?>
-
 <?php
-			echo $_SESSION["username"];
-        ?>
-        
-        <?php
-	error_reporting( E_ALL&~E_NOTICE );
-	/* 消除PHP警告 */
+ini_set("display_errors", "On");          //开启显示错误信息
+error_reporting(E_ALL);                   //显示所有错误信息
+include("../includes/conn.php");          //引入登陆数据库代码
+$_SESSION['username']=$_POST['username']; //试图开启session让首页index接住session数组
+$username=$_POST['username'];             //获取表单用户名
+$userpwd=$_POST['userpwd'];               //获取表单密码
 
-		$noteidresult=mysqli_query($con,"select id from note ;"); 
-		$noteid=mysqli_fetch_array($noteidresult);
-		/* print_r($noteidresult); */
-		/*   mysqli_fetch_all()*/
-		$noteresult=mysqli_query($con,"select notename from note ;"); 
-		$notecolums=mysqli_num_fields($noteresult);
-		$notename=mysqli_fetch_array($noteresult,MYSQL_BOTH);
-		/* 	echo $notename[0]; */
-		$noteresult=mysqli_query($con,"select noteName from note ;"); 
-		$notecolums=mysqli_num_rows($noteresult);
-	/* 	echo $notecolums; */
-		$noteedittime=mysqli_query($con,"select updateTime from note ;"); 
-		$updateTime=mysqli_fetch_array($noteedittime);
-		while ($notename=mysqli_fetch_array($noteresult)) { 
-			for($i=0; $i<=$notecolums; $i++){
-				if($noteid[$i]!=0){
-				echo '<div class="div-noteglass">';
-				echo '<form action="dynamicEditZone.php"  method="POST" >';
-				echo '<input type="hidden" value=" ';
-				echo "$noteid[$i]";
-				echo ' " name="Cdata" id="Cdata" />';
-				echo '<button type="submit" >';			
-				echo "$notename[$i]";echo '</button><br>';
-				/* print_r($noteid); */
-				echo '</form>';
-				echo '<form action="NoteDelete.php"  method="POST">';
-				echo '<input type="hidden" value=" ';
-				echo "$noteid[$i]";
-				echo ' " name="data" id="data" />';
-				echo '<button type="submit" style="float:right; "><i class="fa fa-trash" aria-hidden="true"></i></button>';
-				echo '<a style="font-size:2px">';
-				echo "$updateTime[$i]";echo 'mark';
-				echo '</a>';
-				echo '</form>';
-				echo '</div>';
-				}
-			}
-		} 
-		mysqli_close($con); 
-    ?>
+//用户检查方法类
+class chkinput{
+   var $name;
+   var $pwd;
     
-    <?php
-			$con = mysqli_connect("localhost","root","test");
-			mysqli_select_db($con,"db_notepad");
-			$bookresult=mysqli_query($con,"select bookName from notebook ;"); 
-			$bookcolums=mysqli_num_fields($bookresult);
-			$bookidresult=mysqli_query($con,"select id from notebook;"); 
-			$bookid=mysqli_fetch_array($bookidresult);
-			while ($bookname=mysqli_fetch_array($bookresult)) { 
-				for($i=0; $i<$bookcolums; $i++){
-					echo '<div class="div-bookglass">';
-					echo '<form action="BookDelete.php"  method="POST">';
-					echo '<input type="hidden" value="';
-					echo "$bookid[$i]";
-					echo '" name="data" id="data" />';
-					echo '<a href="">';echo "$bookname[$i]";echo '</a>'; echo '<button type="submit" style="float:right; "><i class="fa fa-trash" aria-hidden="true"></i></button>';
-					echo '</form>';
-					echo '</div>';
-				}
-			} 
-			mysqli_close($con); 
-		?>
+   //初始化私有变量
+   function chkinput($x,$y){
+     $this->name=$x;
+     $this->pwd=$y;
+    }
+
+    //检查表单输入
+    function checkinput(){
+      mysqli_select_db($conn,"estore")or die("出错了？".mysqli_error($conn)) ; //实际上在conn.php已经登陆了
+	    $sql=mysqli_query($conn,"select * from users where Username='$this->name';") or die("加载数据库失败".mysqli_error($conn)) ; 
+      //$sql=mysqli_query($conn,"select * from users where Username='$this->name'")or die("抱歉，无法打开".$mysqli_error());
+	 
+	    //连接数据库之后对数据进行比对
+      $info=mysqli_fetch_array($sql);//数据库查询结果
+      if($info==false){
+          echo "<script language='javascript'>alert('This user does not exist!');history.back();</script>";
+          exit;
+      }
+      else{       
+        echo "Login Success!" ;
+        if($info['Password']==$this->pwd){  
+          session_start();
+          $_SESSION['username']=$info['Username'];
+          echo "<script language='javascript'>parent.location.reload();window.location.href='../trips/index.php';</script>";
+          exit;
+        }
+        else{
+          echo "<script language='javascript'>alert('Incorrect password!');history.back();</script>";
+          exit;
+        }
+      }    
+   }
+ }
+$obj=new chkinput(trim($username),trim($userpwd));  //新对象
+$obj->checkinput() ;                                //执行方法，开始检测登陆信息
+//编写先前端返回的数据
+//前端由此跳转网页
+?>
