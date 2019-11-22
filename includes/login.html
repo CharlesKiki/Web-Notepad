@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+    <form action="" method="post" onsubmit="">
+        <div>
+            <div>
+                用户名
+                <input type="text" name="username" id="username" data-options="prompt:'Enter your account',validType:'User'">
+            </div>
+            <div>
+                密码
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                验证码
+                <input type="text" id="input" value="" />
+                <input type="button" id="code" onclick="createCode()" />
+            </div>
+            <div>
+                <input type="submit" value="登录" onclick="validate()">
+                <input type="button" value="注册" onclick="register();">
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript" src="js/verification_code.js"></script>
+    <script type="text/javascript" src="js/form_check.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            createCode();
+        }
+
+        function register() {
+            window.location.href = "includes/register.html"; //跳转到注册页面
+        }
+        //从服务器检查之后再跳转，别让跳转逻辑和验证码 表单检查逻辑混合了
+    </script>
+</body>
+
+</html>

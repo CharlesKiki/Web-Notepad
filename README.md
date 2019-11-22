@@ -28,3 +28,21 @@
     js/               
      - form_check.js   表单检查
     css/
+
+
+    关于运行环境
+    Wamp的PHP版本更换需要修改一定的配置文件，并不友好。所以采用了国内的集成PHP环境。自带多个版本。
+    关于站点配置
+        注意Hosts文件中要配置虚拟站点和对应的本地地址例如
+            127.0.0.1 mynotebook.com
+        以及注意虚拟站点可以免于将项目放在Localhost之中
+
+    PHP version 7.2.13
+        Focus：Composer也用了这个版本，所以在使用composer.phar文件时要注意版本
+
+Yii
+在使用Composer的时候可以直接配置环境变量，然后使用Composer命令。
+项目模板安装 ：composer create-project yiisoft/yii2-app-basic basic
+
+Hello Yii
+http://mynotebook.com/index.php?r=site/say&message=Hello+World 这是一个经过配置虚拟站点后的访问地址
